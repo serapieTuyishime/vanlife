@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "../Button";
 
 const Hero = () => {
     return (
@@ -23,11 +24,8 @@ const Hero = () => {
                     <p>Rent the perfect van to make your perfect road trip.</p>
                 </p>
 
-                <Link
-                    to="/vans"
-                    className="text-white font-bold flex items-center justify-center h-10 rounded-md bg-orange-400"
-                >
-                    Find your van
+                <Link to="/vans">
+                    <Button text="Find your van" />
                 </Link>
             </div>
         </div>

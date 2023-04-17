@@ -27,6 +27,7 @@ const VansList = () => {
                         price={van.price}
                         key={van.id}
                         image={van.imageUrl}
+                        id={van.id}
                     />
                 ))}
             </div>

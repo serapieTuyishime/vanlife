@@ -7,7 +7,7 @@ const Navigation = () => {
                 #vanlife
             </Link>
             <div className="item-center gap-4 justify-end flex">
-                <Link to="/about" className="bg-blue-300 text-2xl">
+                <Link to="/about" className="text-2xl">
                     About
                 </Link>
                 <Link to="/vans" className="text-2xl">

@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Van = ({ image, price, name }) => {
+const Van = ({ id, image, price, name }) => {
     return (
-        <div
+        <Link
+            to={`/vans/${id}`}
             className="grid gap-2 h-68 bg-lime-300 w-[14rem]
     "
         >
@@ -17,7 +19,7 @@ const Van = ({ image, price, name }) => {
                 <label>{name}</label>
                 <label>{price}</label>
             </div>
-        </div>
+        </Link>
     );
 };
 
