@@ -10,10 +10,7 @@ const HostNavigation = () => {
             <Link to="/host/income" className="text-2xl">
                 Income
             </Link>
-            <Link to="/host/income" className="text-2xl">
-                Vans
-            </Link>
-            <Link to="/host/income" className="text-2xl">
+            <Link to="/host/reviews" className="text-2xl">
                 Reviews
             </Link>
         </div>
