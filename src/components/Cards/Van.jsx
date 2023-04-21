@@ -5,28 +5,28 @@ const Van = ({ id, image, price, name, isSmallcard = false }) => {
     return (
         <>
             {isSmallcard ? (
-                <Link className="h-24 bg-white p-2 flex">
-                    <img src={image} alt={name} className="h-full w-1/5" />
+                <div className="flex h-24 p-2 bg-white">
+                    <img src={image} alt={name} className="w-1/5 h-full" />
                     <label className="w-3/4">
-                        <label className="font-bold text-2xl">{name}</label>
+                        <label className="text-2xl font-bold">{name}</label>
                         <label>{price}/day</label>
                     </label>
                     <label className="flex-grow">Edit</label>
-                </Link>
+                </div>
             ) : (
                 <Link
                     to={`/vans/${id}`}
                     className="grid gap-2 h-68 bg-lime-300 w-[14rem]
     "
                 >
-                    <div className="h-11/12 w-full">
+                    <div className="w-full h-11/12">
                         <img
                             alt={name}
-                            className="h-full object-contain w-full"
+                            className="object-contain w-full h-full"
                             src={image}
                         />
                     </div>
-                    <div className="flex justify-between font-bold text-lg">
+                    <div className="flex justify-between text-lg font-bold">
                         <label>{name}</label>
                         <label>{price}</label>
                     </div>
