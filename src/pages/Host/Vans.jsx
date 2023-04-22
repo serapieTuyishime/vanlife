@@ -23,10 +23,9 @@ export const Vans = () => {
     return (
         <div className="grid gap-4 bg-lime-50">
             <TitleElement text="Your listed vans" />
-            {/* {JSON.stringify(vansData)} */}
             {vansData.slice(0.5).map((van) => {
                 return (
-                    <Link to={`/host/vans/${van.id}`}>
+                    <Link key={van.id} to={`/host/vans/${van.id}`}>
                         <Van
                             isSmallcard
                             id={van.id}

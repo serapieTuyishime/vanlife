@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 
 export const VanDetails = () => {
     const [vanDetails, setVanDetails] = useState([
@@ -12,18 +12,19 @@ export const VanDetails = () => {
             description: "Full description",
         },
     ]);
-    const fetchVansData = async (vanId) => {
-        const res = await fetch("/api/vans");
-        const data = await res.json();
+    const { id: vanId } = useParams();
 
-        setVanDetails(data.vans[0]);
-    };
-    const { id } = useParams();
     useEffect(() => {
-        fetchVansData(id);
-    }, []);
+        const fetchVansData = async () => {
+            const res = await fetch(`/api/host/vans/${vanId}`);
+            const data = await res.json();
 
-    const { name, imageUrl, type, price, category, description } = vanDetails;
+            setVanDetails(data.vans[0]);
+        };
+        fetchVansData();
+    }, [vanId]);
+
+    const { name, imageUrl, type } = vanDetails;
     return (
         <>
             {vanDetails ? (
@@ -32,38 +33,33 @@ export const VanDetails = () => {
                     <div className="w-3/5 p-4 mx-auto bg-white">
                         <div className="flex gap-4">
                             <img
-                                className="w-2/5 h-36"
+                                className="w-1/3 h-44"
                                 src={imageUrl}
                                 alt={name}
                             />
                             <div className="grid justify-center gap-2">
                                 <label>{type}</label>
                                 <label>{name}</label>
-                                <label>{price}/day</label>
+                                <label>{vanDetails.price}/day</label>
                             </div>
                         </div>
                         <div className="grid gap-3">
                             <div className="flex items-center gap-3">
-                                <label className="">Details</label>
-                                <label className="">Pricing</label>
+                                <Link
+                                    className=""
+                                    to={`/host/vans/${vanId}/details`}
+                                >
+                                    Details
+                                </Link>
+                                <Link
+                                    className=""
+                                    to={`/host/vans/${vanId}/pricing`}
+                                >
+                                    Pricing
+                                </Link>{" "}
                                 <label className="">Photos</label>
                             </div>
-                            <label>
-                                <span className="pr-2 font-bold">Name:</span>
-                                {name}
-                            </label>
-                            <label>
-                                <span className="pr-2 font-bold">
-                                    Category:
-                                </span>
-                                {category}
-                            </label>
-                            <label>
-                                <span className="pr-2 font-bold">
-                                    Description:
-                                </span>
-                                {description}
-                            </label>
+                            <Outlet />
                         </div>
                     </div>
                 </div>

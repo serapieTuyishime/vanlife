@@ -31,7 +31,6 @@ const VansList = () => {
                     />
                 ))}
             </div>
-            {/* {JSON.stringify(vansData[1])} */}
         </div>
     );
 };

@@ -8,7 +8,7 @@ const VanDetails = () => {
     const params = useParams();
 
     const fetchVansByID = async () => {
-        const res = await fetch(`/api/vans/${params.id}`);
+        const res = await fetch(`/api/host/vans/${params.id}`);
         const data = await res.json();
 
         setvanDetails(data.vans);
@@ -19,18 +19,17 @@ const VanDetails = () => {
     }, []);
     return vanDetails ? (
         <div className="grid lg:grid-cols-2">
-            <label>{JSON.stringify(vanDetails)}</label>
             <Link to="/vans">Back to vans</Link>
             <img
-                className="h-96 w-full"
+                className="w-full h-96 bg-lime-200"
                 alt={vanDetails.name}
                 src={vanDetails.imageUrl}
             />
             <div className="grid">
                 <Tag text={vanDetails.type} color="orange" />
-                <h1 className="font-bold text-3xl">{vanDetails.name}</h1>
+                <h1 className="text-3xl font-bold">{vanDetails.name}</h1>
                 <label>
-                    <span className="font-bold text-xl">
+                    <span className="text-xl font-bold">
                         {vanDetails.price}
                     </span>
                     /day
