@@ -29,8 +29,10 @@ export const VanDetails = () => {
         <>
             {vanDetails ? (
                 <div className="grid gap-4 bg-lime-50">
-                    <Link to="/host/vans">Back to all vans</Link>
-                    <div className="w-3/5 p-4 mx-auto bg-white">
+                    <Link to=".." relative="path">
+                        Back to all vans
+                    </Link>
+                    <div className="w-3/5 p-4 mx-auto bg-white min-h-[25rem]">
                         <div className="flex gap-4">
                             <img
                                 className="w-1/3 h-44"
@@ -45,21 +47,17 @@ export const VanDetails = () => {
                         </div>
                         <div className="grid gap-3">
                             <div className="flex items-center gap-3">
-                                <Link
-                                    className=""
-                                    to={`/host/vans/${vanId}/details`}
-                                >
+                                <Link className="" to={`details`}>
                                     Details
                                 </Link>
-                                <Link
-                                    className=""
-                                    to={`/host/vans/${vanId}/pricing`}
-                                >
+                                <Link className="" to={`pricing`}>
                                     Pricing
-                                </Link>{" "}
-                                <label className="">Photos</label>
+                                </Link>
+                                <Link className="" to={`photos`}>
+                                    Photos
+                                </Link>
                             </div>
-                            <Outlet />
+                            <Outlet context={{ vanDetails }} />
                         </div>
                     </div>
                 </div>

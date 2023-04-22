@@ -1,25 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 export const SingleVanDetails = () => {
-    const [details, setDetails] = useState([
-        {
-            id: "none",
-            name: "name",
-            price: "23",
-        },
-    ]);
-
-    const { id: vanid } = useParams();
-
-    useEffect(() => {
-        const fetchdetails = async () => {
-            const res = await fetch(`/api/host/vans/${vanid}`);
-            const data = await res.json();
-            setDetails(data.vans[0]);
-        };
-        fetchdetails();
-    }, [vanid]);
+    const { vanDetails: details } = useOutletContext();
     return (
         <div>
             {details ? (

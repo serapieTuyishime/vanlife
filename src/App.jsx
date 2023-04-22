@@ -13,7 +13,7 @@ import HostLayout from "./components/Layouts/HostLayout";
 import Dashboard from "./pages/Host/Dashboard";
 import { Vans as HostVans } from "./pages/Host/Vans";
 import { VanDetails as HostVandetails } from "./pages/Host/VanDetails";
-import { SingleVanDetails } from "./components/vans/SingleVanDetails";
+import { SingleVanDetails as Details } from "./components/vans/SingleVanDetails";
 import { Pricing } from "./components/vans/Pricing";
 import Photos from "./components/vans/Photos";
 
@@ -27,12 +27,14 @@ function App() {
                 <Route path="/vans" element={<VansList />} />
                 <Route path="/vans/:id" element={<VanDetails />} />
                 <Route path="/host" element={<HostLayout />}>
-                    <Route index path="dashboard" element={<Dashboard />} />
+                    <Route index element={<Dashboard />} />
+                    <Route path="dashboard" element={<Dashboard />} />
                     <Route path="income" element={<Income />} />
                     <Route path="reviews" element={<Reviews />} />
                     <Route end path="vans" element={<HostVans />} />
                     <Route path="vans/:id" element={<HostVandetails />}>
-                        <Route path="details" element={<SingleVanDetails />} />
+                        <Route index element={<Details />} />
+                        <Route path="details" element={<Details />} />
                         <Route path="pricing" element={<Pricing />} />
                         <Route path="photos" element={<Photos />} />
                     </Route>
