@@ -20,6 +20,7 @@ import Photos from "./components/vans/Photos";
 function App() {
     return (
         <BrowserRouter>
+            {/* #TODO: Move navigation inside the layout route */}
             <Navigation />
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -28,7 +29,6 @@ function App() {
                 <Route path="/vans/:id" element={<VanDetails />} />
                 <Route path="/host" element={<HostLayout />}>
                     <Route index element={<Dashboard />} />
-                    <Route path="dashboard" element={<Dashboard />} />
                     <Route path="income" element={<Income />} />
                     <Route path="reviews" element={<Reviews />} />
                     <Route end path="vans" element={<HostVans />} />

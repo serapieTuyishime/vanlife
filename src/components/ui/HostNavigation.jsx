@@ -9,28 +9,29 @@ const HostNavigation = () => {
     return (
         <div className="flex justify-start gap-4 item-center">
             <NavLink
-                to="/host/dashboard"
+                to="."
                 className={`text-2xl`}
                 style={({ isActive }) => (isActive ? activeStyles : null)}
+                end
             >
                 Dashboard
             </NavLink>
             <NavLink
-                to="/host/income"
+                to="income"
                 className="text-2xl"
                 style={({ isActive }) => (isActive ? activeStyles : null)}
             >
                 Income
             </NavLink>
             <NavLink
-                to="/host/reviews"
+                to="reviews"
                 className="text-2xl"
                 style={({ isActive }) => (isActive ? activeStyles : null)}
             >
                 Reviews
             </NavLink>
             <NavLink
-                to="/host/vans"
+                to="vans"
                 className="text-2xl"
                 style={({ isActive }) => (isActive ? activeStyles : null)}
             >

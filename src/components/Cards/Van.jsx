@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const Van = ({ id, image, price, name, isSmallcard = false }) => {
