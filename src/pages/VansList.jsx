@@ -24,6 +24,17 @@ const VansList = () => {
         const data = await res.json();
         setVansdata(data.vans);
     };
+
+    function updateSearchParams(key, value) {
+        setSearchParams((prevParams) => {
+            if (value === null) {
+                prevParams.delete(key);
+            } else {
+                prevParams.set(key, value);
+            }
+            return prevParams;
+        });
+    }
     useEffect(() => {
         fetchVansData();
     }, []);
@@ -32,17 +43,17 @@ const VansList = () => {
         <div className="grid ">
             <h1 className="text-3xl font-bold">Explore our van options</h1>
             <div className="my-12 flex gap-2 ">
-                <label onClick={() => setSearchParams({ type: "simple" })}>
-                    <Tag text="simple" />
+                <label onClick={() => updateSearchParams("type", "simple")}>
+                    <Tag text="simple" active={typeFilter === "simple"} />
                 </label>
-                <label onClick={() => setSearchParams({ type: "rugged" })}>
-                    <Tag text="rugged" />
+                <label onClick={() => updateSearchParams("type", "rugged")}>
+                    <Tag text="rugged" active={typeFilter === "rugged"} />
                 </label>
-                <label onClick={() => setSearchParams({ type: "luxury" })}>
-                    <Tag text="luxury" />
+                <label onClick={() => updateSearchParams("type", "luxury")}>
+                    <Tag text="luxury" active={typeFilter === "luxury"} />
                 </label>
-                <label onClick={() => setSearchParams({})}>
-                    <Tag text="Clear" />
+                <label onClick={() => updateSearchParams("type", null)}>
+                    <Tag text="Clear" active={!typeFilter} />
                 </label>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
