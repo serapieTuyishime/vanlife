@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Tag from "../components/Tag";
+import Tag from "../components/ui/Tag";
 import Button from "../components/Button";
 
 const VanDetails = () => {
