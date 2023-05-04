@@ -25,7 +25,7 @@ export const Vans = () => {
             <TitleElement text="Your listed vans" />
             {vansData.slice(0.5).map((van) => {
                 return (
-                    <Link key={van.id} to={`/host/vans/${van.id}`}>
+                    <Link key={van.id} to={van.id}>
                         <Van
                             isSmallcard
                             id={van.id}

@@ -14,7 +14,7 @@ const Van = ({ id, image, price, name, isSmallcard = false }) => {
                 </div>
             ) : (
                 <Link
-                    to={`/vans/${id}`}
+                    to={`${id}`}
                     className="grid gap-2 h-68 bg-lime-300 w-[14rem]
     "
                 >

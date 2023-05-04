@@ -7,19 +7,19 @@ const VanDetails = () => {
     const [vanDetails, setvanDetails] = useState("");
     const params = useParams();
 
-    const { is: vanID } = params();
+    const { id: vanID } = params;
 
     useEffect(() => {
         (async () => {
             const res = await fetch(`/api/host/vans/${vanID}`);
             const data = await res.json();
 
-            setvanDetails(data.vans);
+            setvanDetails(data.vans[0]);
         })();
     }, [vanID]);
     return vanDetails ? (
         <div className="grid lg:grid-cols-2">
-            <Link to="/vans">Back to vans</Link>
+            <Link to=".">&larr; Back to vans</Link>
             <img
                 className="w-full h-96 bg-lime-200"
                 alt={vanDetails.name}
