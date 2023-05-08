@@ -4,9 +4,11 @@ import Footer from "./Footer";
 
 const Layout = () => {
     return (
-        <div>
+        <div className="h-screen">
             <Navigation />
-            <Outlet />
+            <div className="h-4/5">
+                <Outlet />
+            </div>
             <Footer />
         </div>
     );

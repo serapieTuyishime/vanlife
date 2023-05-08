@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Tag from "../components/ui/Tag";
 import Button from "../components/Button";
 
 const VanDetails = () => {
     const [vanDetails, setvanDetails] = useState("");
     const params = useParams();
+    const location = useLocation();
 
     const { id: vanID } = params;
 
@@ -17,9 +18,12 @@ const VanDetails = () => {
             setvanDetails(data.vans[0]);
         })();
     }, [vanID]);
+
+    const search = location.state?.search || "";
+    const searchText = location.state?.type || "all";
     return vanDetails ? (
         <div className="grid lg:grid-cols-2">
-            <Link to=".">&larr; Back to vans</Link>
+            <Link to={`/vans${search}`}>&larr; Back to {searchText} vans</Link>
             <img
                 className="w-full h-96 bg-lime-200"
                 alt={vanDetails.name}
@@ -39,7 +43,13 @@ const VanDetails = () => {
             <Button text="Rent this van" />
         </div>
     ) : (
-        <label>Loading</label>
+        <label>
+            Van not found...
+            <br />
+            <Link to={`/vans`}>
+                <Button text="Go back to all vans" />
+            </Link>
+        </label>
     );
 };
 

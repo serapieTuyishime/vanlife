@@ -14,6 +14,7 @@ import { SingleVanDetails as Details } from "./components/vans/SingleVanDetails"
 import { Pricing } from "./components/vans/Pricing";
 import Photos from "./components/vans/Photos";
 import Layout from "./components/Layout";
+import Page404 from "./pages/Page404";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                             <Route path="photos" element={<Photos />} />
                         </Route>
                     </Route>
+                    <Route path="*" element={<Page404 />} />
                 </Route>
             </Routes>
         </BrowserRouter>
