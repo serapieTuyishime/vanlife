@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Van from "../components/Cards/Van";
 import { Link, useSearchParams } from "react-router-dom";
 import Tag from "../components/ui/Tag";
@@ -8,6 +8,7 @@ import TitleElement from "../components/ui/TitleElement";
 const VansList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [loading, setLoading] = useState(false);
+    const [displayedVans, setDisplayedVans] = useState([]);
     const [vansData, setVansdata] = useState([
         {
             id: "none",
@@ -18,9 +19,18 @@ const VansList = () => {
 
     const typeFilter = searchParams.get("type");
 
-    const displayedVans = typeFilter
-        ? vansData.filter((van) => van.type === typeFilter)
-        : vansData;
+    // const displayedVans = typeFilter
+    //     ? vansData.filter((van) => van.type === typeFilter)
+    //     : vansData;
+
+    useEffect(() => {
+        if (!vansData) return;
+        setDisplayedVans(
+            typeFilter
+                ? vansData.filter((van) => van.type === typeFilter)
+                : vansData
+        );
+    }, [typeFilter, vansData]);
 
     function updateSearchParams(key, value) {
         setSearchParams((prevParams) => {
@@ -36,7 +46,7 @@ const VansList = () => {
         async function loadVansData() {
             setLoading(true);
             const data = await getVans();
-            setVansdata(data.vans);
+            setVansdata(data);
             setLoading(false);
         }
         loadVansData();
@@ -60,24 +70,28 @@ const VansList = () => {
                 </label>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-                {displayedVans.map((van) => (
-                    <Link
-                        state={{
-                            search: `?${searchParams.toString()}`,
-                            type: typeFilter,
-                        }}
-                        to={van.id}
-                        key={van.id}
-                    >
-                        <Van
-                            name={van.name}
-                            price={van.price}
-                            image={van.imageUrl}
-                            id={van.id}
-                            type={van.type}
-                        />
-                    </Link>
-                ))}
+                {displayedVans ? (
+                    displayedVans.map((van) => (
+                        <Link
+                            state={{
+                                search: `?${searchParams.toString()}`,
+                                type: typeFilter,
+                            }}
+                            to={van.id}
+                            key={van.id}
+                        >
+                            <Van
+                                name={van.name}
+                                price={van.price}
+                                image={van.imageUrl}
+                                id={van.id}
+                                type={van.type}
+                            />
+                        </Link>
+                    ))
+                ) : (
+                    <label>No vans to disaplay</label>
+                )}
             </div>
         </div>
     );

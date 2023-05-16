@@ -17,7 +17,7 @@ export const Vans = () => {
         async function loadVansData() {
             setLoading(true);
             const data = await getVans();
-            setVansdata(data.vans);
+            setVansdata(data);
             setLoading(false);
         }
         loadVansData();
@@ -27,20 +27,24 @@ export const Vans = () => {
     return (
         <div className="grid gap-4 bg-lime-50">
             <TitleElement text="Your listed vans" />
-            {vansData.slice(0.5).map((van) => {
-                return (
-                    <Link key={van.id} to={van.id}>
-                        <Van
-                            isSmallcard
-                            id={van.id}
-                            image={van.imageUrl}
-                            price={van.price}
-                            name={van.name}
-                            key={van.id}
-                        />
-                    </Link>
-                );
-            })}
+            {vansData ? (
+                vansData.slice(0.5).map((van) => {
+                    return (
+                        <Link key={van.id} to={van.id}>
+                            <Van
+                                isSmallcard
+                                id={van.id}
+                                image={van.imageUrl}
+                                price={van.price}
+                                name={van.name}
+                                key={van.id}
+                            />
+                        </Link>
+                    );
+                })
+            ) : (
+                <label>Wait for vans to be loaded</label>
+            )}
         </div>
     );
 };
