@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Van from "../components/Cards/Van";
 import { Link, useSearchParams } from "react-router-dom";
 import Tag from "../components/ui/Tag";
