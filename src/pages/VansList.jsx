@@ -3,14 +3,12 @@ import Van from "../components/Cards/Van";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import Tag from "../components/ui/Tag";
 import { getVans } from "../api";
-import TitleElement from "../components/ui/TitleElement";
 
 export function loader() {
     return getVans();
 }
 const VansList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [loading, setLoading] = useState(false);
     const [displayedVans, setDisplayedVans] = useState([]);
 
     const vansData = useLoaderData();
@@ -36,7 +34,6 @@ const VansList = () => {
         });
     }
 
-    if (loading) return <TitleElement text="Loading" />;
     return (
         <div className="grid ">
             <h1 className="text-3xl font-bold">Explore our van options</h1>
