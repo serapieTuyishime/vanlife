@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-
-const Van = ({ id, image, price, name, isSmallcard = false }) => {
+const Van = ({ image, price, name, isSmallcard = false }) => {
     return (
         <>
             {isSmallcard ? (
@@ -13,11 +11,7 @@ const Van = ({ id, image, price, name, isSmallcard = false }) => {
                     <label className="flex-grow">Edit</label>
                 </div>
             ) : (
-                <Link
-                    to={`/vans/${id}`}
-                    className="grid gap-2 h-68 bg-lime-300 w-[14rem]
-    "
-                >
+                <div className="grid gap-2 h-68 bg-lime-300 w-[14rem]">
                     <div className="w-full h-11/12">
                         <img
                             alt={name}
@@ -29,7 +23,7 @@ const Van = ({ id, image, price, name, isSmallcard = false }) => {
                         <label>{name}</label>
                         <label>{price}</label>
                     </div>
-                </Link>
+                </div>
             )}
         </>
     );
