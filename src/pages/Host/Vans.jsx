@@ -1,50 +1,34 @@
-import React, { useEffect, useState } from "react";
 import TitleElement from "../../components/ui/TitleElement";
 import Van from "../../components/Cards/Van";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { getVans } from "../../api";
+import { requireAuth } from "../../utils/handleAuth";
+
+export default async function HostVansloader() {
+    await requireAuth();
+    return getVans();
+}
 
 export const Vans = () => {
-    const [vansData, setVansdata] = useState([
-        {
-            id: "none",
-            name: "name",
-            price: "23",
-        },
-    ]);
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        async function loadVansData() {
-            setLoading(true);
-            const data = await getVans();
-            setVansdata(data);
-            setLoading(false);
-        }
-        loadVansData();
-    }, []);
+    const vansData = useLoaderData();
 
-    if (loading) return <TitleElement text="Loading" />;
     return (
-        <div className="grid gap-4 bg-lime-50">
+        <div className="grid gap-4 w-[40rem] mx-auto">
             <TitleElement text="Your listed vans" />
-            {vansData ? (
-                vansData.slice(0.5).map((van) => {
-                    return (
-                        <Link key={van.id} to={van.id}>
-                            <Van
-                                isSmallcard
-                                id={van.id}
-                                image={van.imageUrl}
-                                price={van.price}
-                                name={van.name}
-                                key={van.id}
-                            />
-                        </Link>
-                    );
-                })
-            ) : (
-                <label>Wait for vans to be loaded</label>
-            )}
+            {vansData.slice(0.5).map((van) => {
+                return (
+                    <Link key={van.id} to={van.id}>
+                        <Van
+                            isSmallcard
+                            id={van.id}
+                            image={van.imageUrl}
+                            price={van.price}
+                            name={van.name}
+                            key={van.id}
+                        />
+                    </Link>
+                );
+            })}
         </div>
     );
 };

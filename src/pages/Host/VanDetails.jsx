@@ -1,28 +1,15 @@
-import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils/handleAuth";
 
+export async function loader({ params }) {
+    await requireAuth();
+    return getHostVans(params.id);
+}
 export const VanDetails = () => {
-    const [vanDetails, setVanDetails] = useState([
-        {
-            name: "NO",
-            imageUrl: "/",
-            type: "simple",
-            price: "0",
-            category: "simple",
-            description: "Full description",
-        },
-    ]);
-    const { id: vanId } = useParams();
+    const data = useLoaderData();
 
-    useEffect(() => {
-        const fetchVansData = async () => {
-            const res = await fetch(`/api/host/vans/${vanId}`);
-            const data = await res.json();
-
-            setVanDetails(data.vans[0]);
-        };
-        fetchVansData();
-    }, [vanId]);
+    const vanDetails = data[0];
 
     const { name, imageUrl, type } = vanDetails;
     return (

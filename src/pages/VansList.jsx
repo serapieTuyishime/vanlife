@@ -1,27 +1,18 @@
 import { useEffect, useState } from "react";
 import Van from "../components/Cards/Van";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import Tag from "../components/ui/Tag";
 import { getVans } from "../api";
-import TitleElement from "../components/ui/TitleElement";
 
+export function loader() {
+    return getVans();
+}
 const VansList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [loading, setLoading] = useState(false);
     const [displayedVans, setDisplayedVans] = useState([]);
-    const [vansData, setVansdata] = useState([
-        {
-            id: "none",
-            name: "name",
-            price: "23",
-        },
-    ]);
 
+    const vansData = useLoaderData();
     const typeFilter = searchParams.get("type");
-
-    // const displayedVans = typeFilter
-    //     ? vansData.filter((van) => van.type === typeFilter)
-    //     : vansData;
 
     useEffect(() => {
         if (!vansData) return;
@@ -42,16 +33,7 @@ const VansList = () => {
             return prevParams;
         });
     }
-    useEffect(() => {
-        async function loadVansData() {
-            setLoading(true);
-            const data = await getVans();
-            setVansdata(data);
-            setLoading(false);
-        }
-        loadVansData();
-    }, []);
-    if (loading) return <TitleElement text="Loading" />;
+
     return (
         <div className="grid ">
             <h1 className="text-3xl font-bold">Explore our van options</h1>
