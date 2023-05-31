@@ -23,15 +23,23 @@ import { Pricing } from "./components/vans/Pricing";
 import Photos from "./components/vans/Photos";
 import Layout from "./components/Layout";
 import Page404 from "./pages/Page404";
-import Login, { loader as loginLoader } from "./pages/Login";
+import Login, {
+    action as loginAction,
+    loader as loginLoader,
+} from "./pages/Login";
 import { requireAuth } from "./utils/handleAuth";
 
 function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route index element={<Layout />}>
+            <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
-                <Route path="/login" element={<Login />} loader={loginLoader} />
+                <Route
+                    path="/login"
+                    element={<Login />}
+                    loader={loginLoader}
+                    action={loginAction}
+                />
                 <Route path="/about" element={<About />} />
                 <Route
                     path="/vans"

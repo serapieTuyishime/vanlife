@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { loginUser } from "../api";
 
 export function loader({ request }) {
     return new URL(request.url).searchParams.get("message");
+}
+
+export function action(obj) {
+    console.log("forn sumbitted", obj);
+    return null;
 }
 export default function Login() {
     const [loginFormData, setLoginFormData] = useState({
@@ -11,9 +17,14 @@ export default function Login() {
         password: "",
     });
 
-    function handleSubmit(e) {
+    const navigate = useNavigate();
+
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(loginFormData);
+        try {
+            const formData = await loginUser(loginFormData);
+            navigate("/host", { replace: true });
+        } catch (error) {}
     }
 
     function handleChange(e) {
@@ -34,7 +45,7 @@ export default function Login() {
                     {message}
                 </label>
             )}
-            <form onSubmit={handleSubmit} className="grid w-full mx-auto gap-4">
+            <Form method="post" className="grid w-full mx-auto gap-4">
                 <input
                     name="email"
                     onChange={handleChange}
@@ -51,8 +62,8 @@ export default function Login() {
                     value={loginFormData.password}
                     className="block py-3 px-4 border border-lime-400 rounded-md"
                 />
-                <Button text="Login" />
-            </form>
+                <button>Login</button>
+            </Form>
         </div>
     );
 }
